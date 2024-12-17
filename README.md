@@ -10,7 +10,7 @@ This project is an API for scraping football data. It is designed solely for edu
 
 ## Support the Project
 
-If you find this project useful and want to support it, you can make a donation through the following platforms:
+If you find this project useful and want to support it, you can make a donation through the following platforms or direct to my [telegram @ht3tmyat](https://t.me/ht3tmyat)
 
 [![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/ht3tmyat)
 
