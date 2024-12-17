@@ -26,17 +26,12 @@ def fetch_server_url(room_num):
     return {"m3u8": None, "hdM3u8": None}
 
 
-def fetch_matches(time_data, main_referer, user_agent):
+def fetch_matches(time_data, main_referer):
     url = f"https://json.vnres.co/match/matches_{time_data}.json"
-    headers = {
-        "referer": main_referer or "https://json.vnres.co",
-        "user-agent": user_agent or "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        "origin": "https://json.vnres.co",
-    }
     daily_matches = []
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url)
         if response.ok:
             match = re.search(r"matches_\d+\((.*)\)", response.text)
             if match:
@@ -108,7 +103,6 @@ def fetch_matches(time_data, main_referer, user_agent):
 @app.route("/matches", methods=["GET"])
 def get_matches():
     main_referer = "https://socolivev.co/"
-    user_agent = request.headers.get("User-Agent", "Default-User-Agent")
 
     current_date = datetime.now()
     match_times = [
@@ -119,7 +113,7 @@ def get_matches():
 
     all_matches = []
     for time_data in match_times:
-        all_matches.extend(fetch_matches(time_data, main_referer, user_agent))
+        all_matches.extend(fetch_matches(time_data, main_referer))
 
     return jsonify(all_matches), 200
 
